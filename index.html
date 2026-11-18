@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generational Ads · Websites, social content en design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#1F2BF2;--lime:#C8F31D;--ink:#0B0B0F;--off:#F4F5FA;--grey:#5B5E6E;--line:#E2E4EE;--mgrey:#A9ACBC}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--off);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Montserrat',system-ui,sans-serif;margin:0}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 26px;border-radius:99px;font-weight:700;font-size:17px;text-decoration:none;transition:transform .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-lime{background:var(--lime);color:var(--ink)}
+.btn-line{border:2px solid #fff;color:#fff}
+/* header */
+.top{background:var(--blue)}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:22px;padding-bottom:22px}
+.logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-family:'Montserrat';font-weight:700;font-size:19px;letter-spacing:-.01em}
+.logo svg{height:30px;width:auto}
+nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px 26px;font-weight:700}
+nav a{color:#fff;text-decoration:none}
+nav .btn{min-height:44px;padding:0 20px;font-size:16px}
+/* hero */
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;align-items:center;padding-top:clamp(24px,5vw,64px);padding-bottom:clamp(48px,7vw,96px)}
+.hero h1{font-weight:800;font-size:clamp(46px,7vw,92px);line-height:.98;letter-spacing:-.04em;color:#fff}
+.hero h1 span{color:var(--lime)}
+.hero p{margin:24px 0 28px;font-size:clamp(17px,1.5vw,20px);line-height:1.6;color:#E3E6FF;max-width:30em}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:18px;background:var(--ink);box-shadow:0 30px 60px rgba(11,11,15,.35)}
+/* stack */
+.stack-intro{background:var(--ink);color:#fff;padding:clamp(72px,10vw,120px) 0 0}
+.stack-intro h2{font-weight:800;font-size:clamp(38px,6vw,76px);line-height:1;letter-spacing:-.04em}
+.stack-intro p{margin:16px 0 0;color:var(--mgrey);font-size:18px}
+.stack{position:relative;background:var(--ink)}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  background:radial-gradient(120% 90% at 70% 60%,#1a24b8 0%,#121a86 30%,#0c0f2b 62%,#0b0b0f 100%)}
+.scene{position:absolute;inset:0;perspective:1400px;perspective-origin:50% 45%}
+.card{position:absolute;left:50%;top:58%;width:min(54vw,860px);aspect-ratio:16/9;margin:0;transform-style:preserve-3d;will-change:transform,filter,opacity}
+.card .face{position:absolute;inset:0;border-radius:22px;overflow:hidden;background:#fff;transform:translateZ(0);transition:box-shadow .3s}
+.card .face img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
+.card .face video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;opacity:0;transition:opacity .45s ease;z-index:1}
+.card .face video.on{opacity:1}
+.card .slab{position:absolute;inset:0;border-radius:22px;background:#cfd3e0;transform:translateZ(-16px)}
+.card .slab2{position:absolute;inset:0;border-radius:22px;background:#b9bdcc;transform:translateZ(-8px)}
+.card.front .face{box-shadow:0 0 0 3px rgba(200,243,29,.9),0 0 46px rgba(200,243,29,.45),0 40px 80px rgba(0,0,0,.45)}
+.title{position:absolute;left:0;right:0;top:clamp(56px,9vh,110px);text-align:center;pointer-events:none}
+.title h3{color:#fff;font-weight:800;font-size:clamp(30px,4.4vw,64px);letter-spacing:-.02em;transition:letter-spacing .7s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.title p{margin:10px 0 0;color:var(--lime);font-family:'Montserrat';font-weight:700;font-size:clamp(15px,1.4vw,22px);transition:letter-spacing .7s cubic-bezier(.2,.8,.2,1),opacity .5s}
+.title.out h3,.title.out p{letter-spacing:.5em;opacity:0}
+.counter{position:absolute;right:clamp(20px,4vw,56px);bottom:clamp(20px,4vh,44px);color:var(--mgrey);font-family:'Montserrat';font-weight:700;font-size:15px}
+.counter b{color:#fff}
+.bar{position:absolute;left:clamp(20px,4vw,56px);bottom:clamp(26px,4.4vh,50px);width:min(220px,30vw);height:3px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--lime)}
+/* sections */
+section.block{padding:clamp(64px,9vw,112px) 0}
+.h2{font-weight:800;font-size:clamp(34px,5vw,60px);line-height:1;letter-spacing:-.035em;margin-bottom:clamp(24px,4vw,44px)}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.svc div{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px}
+.svc .n{font-family:'Montserrat';font-weight:800;color:var(--blue);font-size:15px}
+.svc h3{font-weight:800;font-size:25px;letter-spacing:-.02em;margin:10px 0}
+.svc p{margin:0;color:var(--grey);font-size:17px;line-height:1.6}
+.svc .tag{display:inline-block;margin-top:14px;background:var(--lime);color:var(--ink);font-size:12px;font-weight:700;padding:5px 10px;border-radius:99px}
+.over{background:#fff}
+.over .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,6vw,80px);align-items:center}
+.over h2{font-weight:800;font-size:clamp(40px,6vw,76px);line-height:.98;letter-spacing:-.04em}
+.over h2 span{color:var(--blue)}
+.over p{margin:0 0 16px;font-size:18px;line-height:1.7;color:var(--grey)}
+.how{background:var(--ink);color:#fff}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:36px}
+.steps b{display:block;font-family:'Montserrat';font-weight:800;font-size:48px;color:var(--lime);letter-spacing:-.03em}
+.steps h3{font-weight:700;font-size:22px;margin:10px 0}
+.steps p{margin:0;color:var(--mgrey);font-size:16px;line-height:1.6}
+.contact{background:var(--blue);color:#fff}
+.contact h2{font-weight:800;font-size:clamp(40px,6vw,76px);line-height:.98;letter-spacing:-.04em;max-width:12em}
+.contact p{color:#E3E6FF;font-size:18px;line-height:1.6;max-width:32em}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(32px,6vw,80px);align-items:start}
+.cform{background:#fff;color:var(--ink);border-radius:24px;padding:clamp(22px,3vw,36px);display:grid;gap:16px;box-shadow:0 30px 60px rgba(11,11,15,.25)}
+.cform .row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.cform label{display:grid;gap:6px;font-weight:700;font-size:15px}
+.cform input:not([type=checkbox]),.cform textarea{font:inherit;font-weight:400;font-size:16px;color:var(--ink);background:var(--off);border:2px solid transparent;border-radius:12px;padding:13px 14px;min-height:50px;width:100%;transition:border-color .2s}
+.cform textarea{resize:vertical;min-height:110px}
+.cform input:focus,.cform textarea:focus{outline:none;border-color:var(--blue);background:#fff}
+.cform .bad{border-color:#E5484D!important}
+.cform fieldset{border:0;margin:0;padding:0}
+.cform legend{font-weight:700;font-size:15px;margin-bottom:8px;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{display:block;font-weight:500}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border-radius:99px;border:2px solid var(--line);cursor:pointer;transition:background .2s,border-color .2s}
+.chips input:checked+span{background:var(--lime);border-color:var(--lime)}
+.chips input:focus-visible+span{outline:2px solid var(--blue);outline-offset:2px}
+.cform button{justify-content:center;border:0;cursor:pointer;font-family:inherit;width:100%}
+.cform .fmsg{margin:0;font-size:15px;color:#B42318;font-weight:600;min-height:1em}
+.cform .fmsg.ok{color:#0f7a3a;font-weight:700}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:720px;margin-top:28px}
+.people div{border-top:2px solid rgba(255,255,255,.5);padding-top:16px}
+.people b{display:block;font-family:'Montserrat';font-size:22px}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-top:28px;padding-bottom:28px;color:var(--grey)}
+footer .logo{color:var(--ink)}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .stack{height:auto!important}
+  .stage{position:relative;height:auto;padding:40px 0 60px}
+  .scene{position:relative;perspective:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;padding:0 clamp(20px,4vw,48px);max-width:1200px;margin:0 auto}
+  .card{position:relative;left:auto;top:auto;width:100%;transform:none!important;filter:none!important;opacity:1!important}
+  .card .slab,.card .slab2,.title,.counter,.bar{display:none}
+}
+@media (max-width:700px){
+  .card{width:88vw;top:52%}
+  nav a:not(.btn){display:none}
+}
+</style>
+</head>
+<body>
+<div class="top">
+<header class="wrap">
+<a class="logo" href="#top" aria-label="Generational Ads, naar boven"><svg viewBox="0 -6 667 306" aria-hidden="true"><path d="M418,0 L372,70 L150,70 A80,80 0 0 0 150,230 L233.6,230 L263,185 L155,185 L193,125 L380,125 L266,300 L150,300 A150,150 0 0 1 150,0 Z" fill="#fff"/><path d="M288,300 L363,300 L483.7,111.4 L532.7,200 L448,200 L413,255 L563,255 L588,300 L665,300 L503,10 Q490,-4 477,10 Z" fill="#C8F31D"/></svg>Generational Ads</a>
+<nav aria-label="Hoofdmenu"><a href="#werk">Werk</a><a href="#diensten">Diensten</a><a href="#over">Over</a><a class="btn btn-lime" href="#contact">Kennismaken</a></nav>
+</header>
+<section id="top" class="wrap hero">
+<div>
+<h1>Landelijk niveau. <span>Lokale lijnen.</span></h1>
+<p>Websites die klanten opleveren, voor ondernemers in Drenthe en Groningen. Met social content en design erbij als je verder wilt groeien. Gemaakt door Nils, een jonge maker die je gewoon kunt appen.</p>
+<div class="ctas"><a class="btn btn-lime" href="#contact">Plan een kennismaking</a><a class="btn btn-line" href="#werk">Bekijk het werk</a></div>
+</div>
+<video src="assets/showreel.mp4" poster="assets/showreel.jpg" autoplay muted loop playsinline aria-label="Showreel van websites gemaakt door Generational Ads"></video>
+</section>
+</div>
+
+<div id="werk" class="stack-intro"><div class="wrap"><h2>Websites die ik bouwde.</h2><p>Scroll, en ze komen een voor een naar voren.</p></div></div>
+<section class="stack" aria-label="Websites die ik bouwde">
+<div class="stage">
+<div class="title" aria-live="polite"><h3 id="tName">Barbershop Smilde</h3><p id="tTag">Website</p></div>
+<div class="scene" id="scene">
+<figure class="card" data-name="Barbershop Smilde" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/barbershop.mp4" aria-hidden="true"></video><img src="assets/barbershop.jpg" alt="Homepage van de website van Barbershop Smilde"></div></figure>
+<figure class="card" data-name="HM Camperbouw" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/hm.mp4" aria-hidden="true"></video><img src="assets/hm.jpg" alt="Homepage van de website van HM Camperbouw"></div></figure>
+<figure class="card" data-name="Esam&#8217;s Auto" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/esam.mp4" aria-hidden="true"></video><img src="assets/esam.jpg" alt="Homepage van esamsautos.nl"></div></figure>
+<figure class="card" data-name="Fitnesscentrum Sportique" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/sportique.mp4" aria-hidden="true"></video><img src="assets/sportique.jpg" alt="Homepage van de website van Fitnesscentrum Sportique"></div></figure>
+<figure class="card" data-name="Beursgenoten" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/beursgenoten.mp4" aria-hidden="true"></video><img src="assets/beursgenoten.jpg" alt="Homepage van beursgenoten.nl"></div></figure>
+<figure class="card" data-name="Aandelen Onder Een Tientje" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/aoet.mp4" aria-hidden="true"></video><img src="assets/aoet.jpg" alt="Homepage van aandelenondereentientje.nl"></div></figure>
+</div>
+<div class="bar"><i id="bar"></i></div>
+<div class="counter"><b id="cNow">01</b> / 06</div>
+</div>
+</section>
+
+<section id="diensten" class="block"><div class="wrap">
+<h2 class="h2">Wat ik voor je maak.</h2>
+<div class="svc">
+<div><span class="n">01</span><h3>Websites</h3><p>Een strakke site die vertrouwen geeft en klanten oplevert. Van one-pager tot een site met meerdere pagina&#8217;s.</p><span class="tag">Hier begint het</span></div>
+<div><span class="n">02</span><h3>Social content</h3><p>Elke maand nieuwe video&#8217;s van jouw zaak. Ik kom langs, film met eigen camera en monteer alles klaar om te posten.</p><span class="tag">Video-abonnement</span></div>
+<div><span class="n">03</span><h3>Design</h3><p>Social templates, advertentie-visuals, logo en huisstijl. Alles in één lijn met je merk.</p></div>
+<div><span class="n">04</span><h3>Advertenties</h3><p>Ik maak de advertentie en zet hem voor je live op Meta of Google.</p></div>
+</div></div></section>
+
+<section id="over" class="block over"><div class="wrap grid">
+<h2>Jong, lokaal <span>en eerlijk.</span></h2>
+<div><p>Ik ben Nils uit Assen. Het vak leerde ik bij landelijke merken als Beursgenoten en Aandelen Onder Een Tientje. Mijn gevoel ervoor bouwde ik op met ondernemers om de hoek: sportscholen, kappers, autobedrijven.</p><p>Je appt met degene die het maakt, je weet vooraf wat het kost en we gaan voor een samenwerking waar we allebei blij van worden.</p></div>
+</div></section>
+
+<section class="block how"><div class="wrap">
+<h2 class="h2">Zo werken we samen.</h2>
+<div class="steps">
+<div><b>01</b><h3>Kennismaken</h3><p>Een half uur bij jou op de zaak of online. Ik wil eerst snappen wat jouw klanten drijft.</p></div>
+<div><b>02</b><h3>Voorstel op maat</h3><p>Je krijgt een concreet voorstel met een vaste prijs. Geen kleine lettertjes.</p></div>
+<div><b>03</b><h3>Maken en live</h3><p>Ik ontwerp, bouw en film. Jij keurt goed en wij zetten het live.</p></div>
+</div></div></section>
+
+<section id="contact" class="block contact"><div class="wrap cgrid">
+<div>
+<h2>Zin om samen iets tofs te maken?</h2>
+<p>Vertel kort wie je bent en wat je zoekt. Ik neem zo snel mogelijk contact met je op en kom graag langs voor een kennismaking, bij jou op de zaak.</p>
+</div>
+<form class="cform" id="cform" novalidate>
+<div class="row2">
+<label>Naam<input name="naam" autocomplete="name" required></label>
+<label>Bedrijf<input name="bedrijf" autocomplete="organization"></label>
+</div>
+<div class="row2">
+<label>E-mail<input name="email" type="email" autocomplete="email" required></label>
+<label>Telefoon<input name="telefoon" type="tel" autocomplete="tel"></label>
+</div>
+<fieldset><legend>Waar kan ik je mee helpen?</legend>
+<div class="chips">
+<label><input type="checkbox" name="interesse" value="Website"><span>Website</span></label>
+<label><input type="checkbox" name="interesse" value="Social content"><span>Social content</span></label>
+<label><input type="checkbox" name="interesse" value="Design"><span>Design</span></label>
+<label><input type="checkbox" name="interesse" value="Advertenties"><span>Advertenties</span></label>
+<label><input type="checkbox" name="interesse" value="Weet ik nog niet"><span>Weet ik nog niet</span></label>
+</div></fieldset>
+<label>Bericht<textarea name="bericht" rows="4" placeholder="Bijvoorbeeld: ik heb een kapsalon in Assen en wil een nieuwe website."></textarea></label>
+<button class="btn btn-lime" type="submit">Verstuur bericht</button>
+<p class="fmsg" id="fmsg" role="status"></p>
+</form>
+</div></section>
+
+<footer class="wrap"><a class="logo" href="#top" aria-label="Generational Ads, naar boven"><svg viewBox="0 -6 667 306" aria-hidden="true" style="height:24px"><path d="M418,0 L372,70 L150,70 A80,80 0 0 0 150,230 L233.6,230 L263,185 L155,185 L193,125 L380,125 L266,300 L150,300 A150,150 0 0 1 150,0 Z" fill="#1F2BF2"/><path d="M288,300 L363,300 L483.7,111.4 L532.7,200 L448,200 L413,255 L563,255 L588,300 L665,300 L503,10 Q490,-4 477,10 Z" fill="#1F2BF2"/></svg>Generational Ads</a><span>Assen · Werkgebied Drenthe en Groningen</span></footer>
+
+<script>
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var sec=document.querySelector('.stack'), cards=[].slice.call(document.querySelectorAll('.card'));
+  var N=cards.length, title=document.querySelector('.title'), tName=document.getElementById('tName'), tTag=document.getElementById('tTag');
+  var cNow=document.getElementById('cNow'), bar=document.getElementById('bar');
+  if(reduce){return;}
+  sec.style.height=(N*90+60)+'vh';
+  var cur=0, lastQ=null, lastT=performance.now(), vel=0, swapTimer=null;
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function ease(x){return 1-Math.pow(1-x,3);}
+  function small(){return window.innerWidth<700;}
+  function setTitle(i){
+    if(i===cur) return; cur=i;
+    title.classList.add('out'); clearTimeout(swapTimer);
+    swapTimer=setTimeout(function(){
+      tName.textContent=cards[i].getAttribute('data-name').replace('&#8217;','’');
+      tTag.textContent=cards[i].getAttribute('data-tag');
+      title.classList.remove('out');
+    },260);
+    cNow.textContent=('0'+(i+1)).slice(-2);
+  }
+  function warm(c){var v=c.querySelector('video'); if(v&&!v.src){v.src=v.getAttribute('data-src'); v.preload='auto';}}
+  function vid(c,on){
+    var v=c.querySelector('video'); if(!v) return;
+    clearTimeout(v._t);
+    if(on){ warm(c); try{v.currentTime=0;}catch(e){} var p=v.play(); if(p&&p.catch)p.catch(function(){});
+      v.onplaying=function(){ if(c.classList.contains('front')) v.classList.add('on'); };
+      v.onended=function(){ v.classList.remove('on'); v._t=setTimeout(function(){ if(c.classList.contains('front')){ v.currentTime=0; v.play(); } },1400); };
+    } else { v.classList.remove('on'); v._t=setTimeout(function(){v.pause();},450); }
+  }
+  function frame(){
+    var r=sec.getBoundingClientRect(), total=sec.offsetHeight-window.innerHeight;
+    var prog=clamp(-r.top/Math.max(1,total),0,1);
+    var q=1+prog*(N-1)*1.0;
+    var now=performance.now(); if(lastQ!==null){var dt=Math.max(16,now-lastT); vel=vel*0.7+0.3*Math.abs(q-lastQ)/dt*1000;} lastQ=q; lastT=now;
+    var m=small(), sx=m?0.35:1;
+    for(var i=0;i<N;i++){
+      var c=cards[i], a=clamp(q-i,0,1), d=Math.max(0,q-i-1), t,o=1,f='';
+      if(a<1){
+        var e=ease(a);
+        var RY=m?-14:-22; var x=(55-53*e)*sx, y=8-8*e, z=700-700*e, ry=-55+(55+RY)*e;
+        t='translate(-50%,-50%) translate3d('+x+'vw,'+y+'vh,'+z+'px) rotateY('+ry+'deg) rotateX(6deg)';
+        o=clamp(a*2.2,0,1); var b=Math.min(10,(1-e)*14+vel*1.5*(1-e)); f='blur('+b.toFixed(1)+'px)';
+      } else {
+        var x2=(2-8*d)*sx, y2=-1.5*d, z2=-260*d;
+        t='translate(-50%,-50%) translate3d('+x2+'vw,'+y2+'vh,'+z2+'px) rotateY('+(m?-14:-22)+'deg) rotateX(6deg)';
+        o=clamp((3.4-d)/0.8,0,1); f='brightness('+(1-Math.min(0.6,0.22*d)).toFixed(2)+')';
+      }
+      c.style.transform=t; c.style.opacity=o; c.style.filter=f; c.style.zIndex=String(100-Math.round(d*10)+(a<1?50:0));
+      var fr=(a>0.97 && d<0.35); if(fr!==c.classList.contains('front')){c.classList.toggle('front',fr); vid(c,fr);}
+      if(a>0.2 && d<1) warm(c);
+    }
+    setTitle(clamp(Math.round(q-1),0,N-1));
+    bar.style.width=(prog*100).toFixed(1)+'%';
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+(function(){
+  // Koppel hier de inbox: maak gratis een access key aan op web3forms.com met het e-mailadres waar berichten heen moeten.
+  var FORM={endpoint:'https://api.web3forms.com/submit', key:''};
+  var f=document.getElementById('cform'), msg=document.getElementById('fmsg');
+  f.addEventListener('submit',function(ev){
+    ev.preventDefault(); msg.className='fmsg'; msg.textContent='';
+    var naam=f.naam, mail=f.email, ok=true;
+    [naam,mail].forEach(function(el){el.classList.remove('bad');});
+    if(!naam.value.trim()){naam.classList.add('bad'); ok=false;}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail.value.trim())){mail.classList.add('bad'); ok=false;}
+    if(!ok){msg.textContent='Vul je naam en een geldig e-mailadres in.'; (naam.classList.contains('bad')?naam:mail).focus(); return;}
+    if(!FORM.key){msg.textContent='Dit formulier is nog niet gekoppeld aan een inbox.'; return;}
+    var keuzes=[].slice.call(f.querySelectorAll('input[name=interesse]:checked')).map(function(i){return i.value;}).join(', ');
+    var data={access_key:FORM.key, subject:'Nieuwe aanvraag via generationalads', from_name:'Generational Ads website',
+      naam:naam.value.trim(), bedrijf:f.bedrijf.value.trim(), email:mail.value.trim(), telefoon:f.telefoon.value.trim(),
+      interesse:keuzes||'Niet aangegeven', bericht:f.bericht.value.trim()};
+    var btn=f.querySelector('button'); btn.disabled=true; btn.textContent='Versturen...';
+    fetch(FORM.endpoint,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.json();}).then(function(j){
+        if(j&&j.success){f.reset(); msg.className='fmsg ok'; msg.textContent='Dank je! Je bericht is verstuurd. Ik neem snel contact met je op.';}
+        else{msg.textContent='Versturen lukte niet. Probeer het zo nog eens.';}
+      }).catch(function(){msg.textContent='Versturen lukte niet. Probeer het zo nog eens.';})
+      .then(function(){btn.disabled=false; btn.textContent='Verstuur bericht';});
+  });
+})();
+</script>
+</body>
+</html>
