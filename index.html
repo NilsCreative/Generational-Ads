@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Generational Ads · Websites, social content en design</title>
+<title>Generational Ads · Websites, video en design</title>
 <meta name="description" content="Generational Ads ontwerpt en bouwt websites en maakt korte video&#8217;s en grafisch ontwerp voor ondernemers. Vanuit Assen, voor klanten door heel Nederland.">
 <link rel="canonical" href="https://generationalads.nl/">
 <meta name="robots" content="index, follow">
@@ -256,8 +256,8 @@ footer .legal a:hover{color:var(--ink)}
 <figure class="card" data-name="HM Camperbouw" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/hm.mp4" aria-hidden="true"></video><img src="assets/hm.jpg" alt="Homepage van de website van HM Camperbouw"></div></figure>
 <figure class="card" data-name="Esam&#8217;s Auto" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/esam.mp4" aria-hidden="true"></video><img src="assets/esam.jpg" alt="Homepage van esamsautos.nl"></div></figure>
 <figure class="card" data-name="Fitnesscentrum Sportique" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/sportique.mp4" aria-hidden="true"></video><img src="assets/sportique.jpg" alt="Homepage van de website van Fitnesscentrum Sportique"></div></figure>
-<figure class="card" data-name="Beursgenoten" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/beursgenoten.mp4" aria-hidden="true"></video><img src="assets/beursgenoten.jpg" alt="Homepage van beursgenoten.nl"></div></figure>
-<figure class="card" data-name="Aandelen Onder Een Tientje" data-tag="Website"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/aoet.mp4" aria-hidden="true"></video><img src="assets/aoet.jpg" alt="Homepage van aandelenondereentientje.nl"></div></figure>
+<figure class="card" data-name="Beursgenoten" data-tag="Website met artikelen en ledenomgeving"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/beursgenoten.mp4" aria-hidden="true"></video><img src="assets/beursgenoten.jpg" alt="Homepage van beursgenoten.nl"></div></figure>
+<figure class="card" data-name="Aandelen Onder Een Tientje" data-tag="Website met artikelen en ledenomgeving"><div class="slab"></div><div class="slab2"></div><div class="face"><video muted playsinline preload="none" data-src="assets/aoet.mp4" aria-hidden="true"></video><img src="assets/aoet.jpg" alt="Homepage van aandelenondereentientje.nl"></div></figure>
 </div>
 <div class="bar"><i id="bar"></i></div>
 <div class="counter"><b id="cNow">01</b> / 06</div>
@@ -467,7 +467,8 @@ footer .legal a:hover{color:var(--ink)}
     },3200);
   })();
   if(reduce){return;}
-  sec.style.height=(N*90+60)+'vh';
+  function sizeStack(){ sec.style.height=(small()? N*55+40 : N*90+60)+'vh'; }
+  sizeStack(); window.addEventListener('resize',sizeStack);
   var cur=0, lastQ=null, lastT=performance.now(), vel=0, swapTimer=null;
   function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
   function ease(x){return 1-Math.pow(1-x,3);}
@@ -547,5 +548,6 @@ footer .legal a:hover{color:var(--ink)}
   });
 })();
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
