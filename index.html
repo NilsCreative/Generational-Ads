@@ -21,9 +21,15 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Generational Ads", "url": "https://generationalads.nl/", "logo": "https://generationalads.nl/apple-touch-icon.png", "image": "https://generationalads.nl/og-image.jpg", "description": "Generational Ads ontwerpt en bouwt websites en maakt korte video's en grafisch ontwerp voor ondernemers. Vanuit Assen, voor klanten door heel Nederland.", "address": {"@type": "PostalAddress", "addressLocality": "Assen", "addressRegion": "Drenthe", "addressCountry": "NL"}, "areaServed": {"@type": "Country", "name": "Nederland"}, "founder": {"@type": "Person", "name": "Nils"}, "knowsAbout": ["Webdesign", "Websites bouwen", "Videoproductie", "Social media content", "Grafisch ontwerp", "Online advertenties", "WordPress-plugins"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Diensten", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Websites"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Social content en video"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Grafisch ontwerp"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Advertenties"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Maatwerk: plugins en widgets"}}]}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/montserrat-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/montserrat-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/montserrat-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:800;font-display:swap;src:url(assets/fonts/montserrat-latin-800-normal.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/dm-sans-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/dm-sans-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(assets/fonts/dm-sans-latin-700-normal.woff2) format('woff2')}
 :root{--blue:#1F2BF2;--lime:#C8F31D;--ink:#0B0B0F;--off:#F4F5FA;--grey:#5B5E6E;--line:#E2E4EE;--mgrey:#A9ACBC}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -200,6 +206,9 @@ section.block{padding:clamp(64px,9vw,112px) 0}
 .people b{display:block;font-family:'Montserrat',system-ui,sans-serif;font-size:22px}
 footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-top:28px;padding-bottom:28px;color:var(--grey)}
 footer .logo{color:var(--ink)}
+footer .legal{display:flex;gap:18px}
+footer .legal a{color:var(--grey);text-decoration:underline;text-underline-offset:3px}
+footer .legal a:hover{color:var(--ink)}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   .mono .a{transition:none!important;animation:none!important;transform:none!important}
@@ -357,7 +366,7 @@ footer .logo{color:var(--ink)}
 </form>
 </div></section>
 
-<footer class="wrap"><a class="logo" href="#top" aria-label="Generational Ads, naar boven"><svg viewBox="0 -6 667 306" aria-hidden="true" style="height:24px"><path d="M418,0 L372,70 L150,70 A80,80 0 0 0 150,230 L233.6,230 L263,185 L155,185 L193,125 L380,125 L266,300 L150,300 A150,150 0 0 1 150,0 Z" fill="#1F2BF2"/><path d="M288,300 L363,300 L483.7,111.4 L532.7,200 L448,200 L413,255 L563,255 L588,300 L665,300 L503,10 Q490,-4 477,10 Z" fill="#1F2BF2"/></svg>Generational Ads</a><span>Assen · Voor klanten door heel Nederland</span></footer>
+<footer class="wrap"><a class="logo" href="#top" aria-label="Generational Ads, naar boven"><svg viewBox="0 -6 667 306" aria-hidden="true" style="height:24px"><path d="M418,0 L372,70 L150,70 A80,80 0 0 0 150,230 L233.6,230 L263,185 L155,185 L193,125 L380,125 L266,300 L150,300 A150,150 0 0 1 150,0 Z" fill="#1F2BF2"/><path d="M288,300 L363,300 L483.7,111.4 L532.7,200 L448,200 L413,255 L563,255 L588,300 L665,300 L503,10 Q490,-4 477,10 Z" fill="#1F2BF2"/></svg>Generational Ads</a><span>Assen · Voor klanten door heel Nederland</span><span class="legal"><a href="privacy.html">Privacy</a><a href="voorwaarden.html">Algemene voorwaarden</a></span></footer>
 
 <script>
 (function(){
